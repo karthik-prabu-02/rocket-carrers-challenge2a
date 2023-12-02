@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <main class="container mt-4">
+        <h1 class="display-5 fw-normal">Book Library</h1>
+        <section class="input-group">
+            <input
+            type="text"
+            placeholder="Book Title"
+            class="form-control"
+            id="title"
+            />
+            <input
+            type="text"
+            placeholder="Author"
+            class="form-control"
+            id="author"
+            />
+            <input
+            type="number"
+            placeholder="Publication Year"
+            class="form-control"
+            id="year"
+            />
+            <button class="btn btn-primary" onClick="addBook()">Add Button</button>
+        </section>
+        <ul id="list" class="list-group mt-3">
+        
+        </ul>
+    </main>
+
+
+    <script>
+        const title = document.getElementById("title");
+        const author = document.getElementById("author");
+        const publicationYear = document.getElementById("year");
+        const bookList = document.getElementById("list");
+
+        function addBook () {
+            const bookTitle = title.value;
+            const bookAuthor = author.value;
+            const pubYear = publicationYear.value;
+            
+            if(!bookTitle || !bookAuthor || !pubYear) {
+                alert("Please Enter Valid Book Details");
+                return;
+            } else {
+                // console.log(bookAuthor,bookTitle,pubYear);
+                const list = document.createElement("li");
+                list.innerHTML = `<b>${bookTitle}</b> by ${bookAuthor}, Year : ${pubYear} <button class="btn btn-danger" onClick ="removeBook(this)">Remove</button>`;
+                list.className = "list-group-item d-flex align-items-center justify-content-between";
+                bookList.appendChild(list);
+
+                title.value = "";
+                author.value="";
+                publicationYear.value = "";
+
+            }
+        }
+
+        function removeBook (book) {
+            const rmBook = book.closest(".list-group-item");
+            rmBook.parentNode.removeChild(rmBook);
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
